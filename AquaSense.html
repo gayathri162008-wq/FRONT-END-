@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AquaSense – Water Usage Awareness</title>
+
+    <!-- ===== CSS START ===== -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f2f8fb;
+            color: #333;
+        }
+
+        header {
+            background-color: #0077b6;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        section {
+            background: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+
+        input {
+            padding: 8px;
+            width: 70%;
+        }
+
+        button {
+            padding: 8px 15px;
+            background-color: #0096c7;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #005f8f;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 6px 0;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #0077b6;
+            color: white;
+            padding: 10px;
+        }
+    </style>
+    <!-- ===== CSS END ===== -->
+
+</head>
+<body>
+
+    <header>
+        <h1>AquaSense</h1>
+        <p>Track • Visualize • Conserve Water</p>
+    </header>
+
+    <main>
+        <section class="input-section">
+            <h2>Enter Daily Water Usage</h2>
+            <input type="number" id="waterInput" placeholder="Liters used today">
+            <button onclick="addUsage()">Add Usage</button>
+        </section>
+
+        <section class="data-section">
+            <h2>Water Usage Data</h2>
+            <ul id="usageList"></ul>
+        </section>
+
+        <section class="summary-section">
+            <h2>Total Consumption</h2>
+            <p id="totalUsage">0 Liters</p>
+        </section>
+
+        <section class="tips-section">
+            <h2>Water Saving Tips</h2>
+            <ul>
+                <li>Turn off taps while brushing.</li>
+                <li>Fix leaking pipes immediately.</li>
+                <li>Use buckets instead of showers.</li>
+                <li>Reuse water whenever possible.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 AquaSense | Save Water, Save Life</p>
+    </footer>
+
+    <!-- ===== JavaScript START ===== -->
+    <script>
+        let usageData = [];
+        let total = 0;
+
+        function addUsage() {
+            const input = document.getElementById("waterInput");
+            const value = Number(input.value);
+
+            if (value <= 0) {
+                alert("Please enter a valid water usage value.");
+                return;
+            }
+
+            usageData.push(value);
+            total += value;
+
+            displayData();
+            input.value = "";
+        }
+
+        function displayData() {
+            const list = document.getElementById("usageList");
+            list.innerHTML = "";
+
+            usageData.forEach((item, index) => {
+                const li = document.createElement("li");
+                li.textContent = `Day ${index + 1}: ${item} Liters`;
+                list.appendChild(li);
+            });
+
+            document.getElementById("totalUsage").textContent =
+                total + " Liters";
+        }
+    </script>
+    <!-- ===== JavaScript END ===== -->
+
+</body>
+</html>
