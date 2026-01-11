@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GreenScape</title>
+
+    <!-- CSS START -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f9f4;
+        }
+
+        header {
+            background-color: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        nav {
+            background-color: #388e3c;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav a {
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #1b5e20;
+        }
+
+        .search {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .search input {
+            padding: 8px;
+            width: 200px;
+        }
+
+        .search button {
+            padding: 8px 15px;
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .plants {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            width: 200px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        footer {
+            background-color: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+    <!-- CSS END -->
+
+</head>
+<body>
+
+    <header>
+        <h1>GreenScape</h1>
+        <p>Your Guide to Sustainable Gardening</p>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Plant Care</a>
+        <a href="#">Gardening Tips</a>
+        <a href="#">Eco Products</a>
+    </nav>
+
+    <section class="search">
+        <input type="text" id="searchInput" placeholder="Search plants...">
+        <button onclick="searchPlant()">Search</button>
+    </section>
+
+    <section id="plantContainer" class="plants">
+        <!-- Plant cards will appear here -->
+    </section>
+
+    <footer>
+        <p>© 2026 GreenScape | Sustainable Living</p>
+    </footer>
+
+    <!-- JAVASCRIPT START -->
+    <script>
+        const plants = [
+            {
+                name: "Tulsi",
+                care: "Needs sunlight and daily watering",
+                season: "All seasons"
+            },
+            {
+                name: "Aloe Vera",
+                care: "Water twice a week, indirect sunlight",
+                season: "Summer"
+            },
+            {
+                name: "Rose",
+                care: "Regular watering and pruning",
+                season: "Winter"
+            }
+        ];
+
+        const container = document.getElementById("plantContainer");
+
+        function displayPlants(list) {
+            container.innerHTML = "";
+            list.forEach(plant => {
+                const card = document.createElement("div");
+                card.className = "card";
+                card.innerHTML = `
+                    <h3>${plant.name}</h3>
+                    <p><strong>Care:</strong> ${plant.care}</p>
+                    <p><strong>Season:</strong> ${plant.season}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function searchPlant() {
+            const input = document.getElementById("searchInput").value.toLowerCase();
+            const filtered = plants.filter(plant =>
+                plant.name.toLowerCase().includes(input)
+            );
+            displayPlants(filtered);
+        }
+
+        // Initial display
+        displayPlants(plants);
+    </script>
+    <!-- JAVASCRIPT END -->
+
+</body>
+</html>
